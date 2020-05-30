@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>PVS Mapping Pipelines - MVP Doc</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "PVS Mapping Pipelines";
+    var mkdocs_page_input_path = "pvs.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> MVP Doc</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">MVP Documentation</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../installation/">Getting Started</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">PVS Mapping Pipelines</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#mapping-pvs-using-epc-t1-and-t2">Mapping PVS using EPC (T1 and T2)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#mapping-pvs-in-bg">Mapping PVS in BG</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mapping-pvs-from-only-t2-mri">Mapping PVS from only T2 MRI</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mapping-pvs-from-typical-t1-mri">Mapping PVS from typical T1 MRI</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../pvs_qc/">PVS Quality Control and Correction</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../about/">About</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../license/">Licence</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">MVP Doc</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>PVS Mapping Pipelines</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="pvs-mapping-pipelines">PVS Mapping Pipelines</h1>
+<p>On this section, several pipelines are presented that enable automated PVS mapping from different input data scenarios. <strong>Note  that these pipelines may not be optimized for all datasets or applications, and therefore require visual inspection and parameter optimization.</strong></p>
+<p>Here we share pipelines that are tested on certain datasets (e.g. <a href="https://www.humanconnectome.org">Human Connectome Project</a> or <a href="http://adni.loni.usc.edu">ADNI</a> cohorts). These pipelines allow users to have a simple and fast implementation of the PVS mapping. Underlying modules and image processing approaches used in these pipelines are descripted in this <a href="https://www.nature.com/articles/s41598-019-48910-x">paper</a>. </p>
+<h2 id="mapping-pvs-using-epc-t1-and-t2">Mapping PVS using EPC (T1 and T2)</h2>
+<p>This pipeline is written for when both 3D T1 and 3D T2 MRIs are available, which provides a high sensitivity to PVS. The ideal input for this pipeline is HCP-like data (i.e. submilimeter 3D T1w and T2w).  </p>
+<p>T1w and T2w should be preprocessed using HCP minimal preprocessing pipeline (users can use their own preprocessing, but should ensure that T1 and T2 are aligned and are saved using below naming conventions). The pipline reads <code>T1w_acpc_dc_restore_brain.nii.gz</code>, <code>T2w_acpc_dc_restore_brain.nii.gz</code>, <code>wmparc.nii.gz</code> and <code>ribbon.nii.gz</code> files and generates enhanced PVS contrast (EPC). It also generates PVS mask in white matter and basal ganglia and quantifies PVS volume fraction in these regions using <code>wmparc</code> labels. For more information about white matter regions of <code>wmparc</code> see <a href="https://surfer.nmr.mgh.harvard.edu/ftp/articles/desikan06-parcellation.pdf">this paper</a>.</p>
+<p>To run the pipline, use:</p>
+<pre><code>mvp.pvs.epc.sh -f path-to-study -s subject-id [-t segmentation-threshold] [-w white-matter-segmentation] [-b basal-ganglia-segmentation] [-i input-image] [-o output-folder-name]
+</code></pre>
+<p>Arguments of <code>mvp.pvs.epc.sh</code> are:</p>
+<pre><code class="text">Required aruguments:
+-f : path to the study folder (e.g. -f /data/projects/adni)  
+-s : subject ID (e.g. -s subj-01)
+
+Optional arguments: 
+-t : threshold to be applied on vessel likelihhood [default = 0.00002]  
+-w : segment PVS in white matter. set -w 0 to skip white matter [default = 1]
+-b : segment PVS in basal ganglia. set -b 0 to skip basal ganglia [default = 1]
+-i : input MRI. set 0 to use both t1 and t2, set to 1 for T1 and 2 for T2 [default = 0]
+-v : remove PVS larger than X voxels (e.g. -v 100) [default = do nothing]
+-o : name of the output directory [default = pvs]
+</code></pre>
+
+<p>The pipeline assumes a repository format similar to HCP repositories. </p>
+<pre><code>study-folder
+        |___sub-01
+                |___T1w
+                    |___T1w_acpc_dc_restore_brain.nii.gz
+                    |___T2w_acpc_dc_restore_brain.nii.gz
+                    |___wmparc.nii.gz               
+</code></pre>
+
+<p>After running this pipeline, a <code>$output-folder-name</code> will be added. We suggest <code>-o pvs</code> for output name, which is the default value. The output folder will contain pvs mask <code>pvs.mask.nii.gz</code> and a directory containing PVS volume fraction across white matter <code>pvs.stat/</code>. Other intermediate files are also stored in the same folder.</p>
+<p>For example, this code will generate below outputs. </p>
+<pre><code>mvp.pvs.epc.sh -f ${MVPDIR}/example/hcp-like_example -s sub-01
+</code></pre>
+<pre><code>study-folder
+        |___sub-01
+                |___T1w
+                    |___T1w_acpc_dc_restore_brain.nii.gz
+                    |___T2w_acpc_dc_restore_brain.nii.gz
+                    |___wmparc.nii.gz
+                |___pvs
+                      |___epc.nii.gz
+                      |___pvs.mask.nii.gz
+                      |___pvs.stat
+                            |___wm.csv
+                            |___wmparc.csv
+</code></pre>
+
+<p>EPC image has a significantly higher PVS contrast in comparison with T1w and T2w, which is suitable to map small PVS and detecting PVS from background noise. </p>
+<p><img alt="epc example" src="../img/epc.example.png" /></p>
+<p>If a same acquisition as HCP is used for your data, we recommend to use the defaul threshold, which we have optimized specifically for HCP data <a href="link">ref</a>. The optimum is <code>-t 0.000001</code> (around <code>1.5</code> when the threshold was standardized across Frangi outputs range for the tested HCP sample - for more information please see the EPC paper). If the defaul threshold did not provide the optimum results in your data, we recommend a number around the default value. </p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In order to find the optimum threshold for your dataset, run the existing pipeline with default values. Then overlay <code>sub-01/pvs/frangi.nii.gz</code> on EPC image <code>sub-01/pvs/epc.nii.gz</code> and assess different thresholds. You can then create a new PVS mask using <code>fslmaths frangi.nii.gz -thr $new_threshold -bin new_pvs_mask.nii.gz</code></p>
+</div>
+<p><img alt="t1_frangi_overlay" src="../img/t1.frangi.overlay.png" /></p>
+<p>Alternatively, you can use automated threshold identification techniques to find the optimum threshold for your data. More information about automated threshold identification will be added in the future.</p>
+<h3 id="mapping-pvs-in-bg">Mapping PVS in BG</h3>
+<p>Currently, for basal ganglia PVS segmentation MVP only uses T2 MRI. This is done by default and no set up is required. If you wish to segment BG PVS using T1, set <code>-i 1</code> (which is not recommended if T2 is available).</p>
+<p>Note that both WM and BG segmentation will be done using the same threshold. to use different threshold for each region, users should run the <code>mvp.pvs.epc.sh</code> command twice, similar to below examples:</p>
+<pre><code class="bash"># Skip BG and use t=0.00001 for WM
+mvp.pvs.epc.sh -f ${MVPDIR}/example/hcp-like_example -s sub-01 -w 1 -b 0 -t 0.00001
+# Skip WM and use t=0.00005 for BG
+mvp.pvs.epc.sh -f ${MVPDIR}/example/hcp-like_example -s sub-01 -w 0 -b 1 -t 0.00005
+</code></pre>
+
+<p>Results from both of above commands will be stored in <code>study-folder/sub-id/pvs</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We noted that BG PVS mapping is less stable compared to WM PVS mapping. Hence, it requires visual inspection and most likely manual correction.</p>
+</div>
+<h3 id="mapping-pvs-from-only-t2-mri">Mapping PVS from only T2 MRI</h3>
+<p>This pipeline can be used for PVS mapping using only one of 3D T1 or 3D T2 MRI on HCP-like data. Note that when both are  available the EPC approach is recommended. We added this option because there are certain situations that user may want to derive PVS from only T1 or T2. For example, when T1 and T2 could not be aligned. Or when one is distorted.  </p>
+<p>To run this pipeline, we assumed the MRI has been preprocessed using HCP minimal preprocessing pipeline. The folder configuration therefore would be similar to the EPC example. </p>
+<p>To run the PVS pipeline on single data, use <code>-i</code> argument. Use <code>-i 1</code> for T1 and <code>-i 2</code> for T2. Default takes both images (<code>-i 0</code>). Here is an example of running this pipeline only on 3D T2 MRI: </p>
+<pre><code>mvp.pvs.epc.sh -f ${MVPDIR}/example/hcp-like_example -s sub-01 -i 2 -o pvs_t2
+</code></pre>
+<p>Optimum thresholds for this task are <code>t=0.02</code> and <code>t=0.01</code> for T1 and T2, respectively. These thresholds are set as the default value. Similar to above examples, assess the quality of the PVS segmenation and ensure the threshold is optimum for your dataset. </p>
+<h2 id="mapping-pvs-from-typical-t1-mri">Mapping PVS from typical T1 MRI</h2>
+<p>Here by "typical T1 MRI" we are referring to conventional 1mm<sup>3</sup> T1-weighted MRI, which is often used in clinical studies such as ADNI. Such data is not optimal for PVS mapping due to the low resolution and lack of accompanying 3D T2-weighted MRI. However, these images can still be used to high caliber PVS.</p>
+<p>MVP uses the output of FreeSurfer <code>recon-all</code> as the input to the PVS mapping pipeline. The pipline reads <code>T1.mgz</code> and <code>wmparc.mgz</code> files and generate PVS mask and quantifies PVS volume fraction globally and across white matter regions, defined by <code>wmparc</code>. For more information about white matter regions of <code>wmparc</code> see <a href="https://surfer.nmr.mgh.harvard.edu/ftp/articles/desikan06-parcellation.pdf">this paper</a>.</p>
+<p>To run the pipline, use:</p>
+<pre><code>mvp.pvs.fsout.sh -f path-to-study -s subject-id [-t segmentation-threshold] [-b basal-ganglia-segmentation] [-o output-folder-name]
+</code></pre>
+<p>Arguments of <code>mvp.pvs.fsout.sh</code> are:</p>
+<pre><code class="text">Required aruguments:
+-f : path to the study folder (e.g. -f /data/projects/adni)  
+-s : subject ID (e.g. -s subj-01)
+
+Optional arguments: 
+-t : threshold to be applied on vessel likelihhood [default = 0.00002]  
+-b : also segment PVS in basal ganglia. set -b 0 to skip basal ganglia [default = 1]
+-v : remove PVS larger than X voxels (e.g. -v 100) [default = do nothing]
+-o : name of the output directory [default = pvs]
+</code></pre>
+
+<p>The pipeline assumes a repository format similar to BIDS. And expect to have a folder called <code>fsout</code> containing output of FreeSurfer <code>recon-all</code>.</p>
+<pre><code>study-folder
+        |___sub-01
+                |___anat
+                |___fsout               
+</code></pre>
+
+<p>After running this pipeline, a <code>$output-folder-name</code> will be added. We suggest <code>-o pvs</code> for output name, which is the default value. The output folder will contain pvs masks (<code>pvs.mask.nii.gz</code> and <code>pvs.bg.final.nii.gz</code>), and a directory containing PVS volume fraction across white matter and basal ganglia (<code>pvs.stat/</code>). Other intermediate files are also stored in the same folder.</p>
+<p>An example is included in the repository which can be tested by running below command: </p>
+<pre><code>mvp.pvs.fsout.sh -f ${MVPDIR}/example/fs_example -s sub-01
+</code></pre>
+<p>The output of above command is:</p>
+<pre><code>study-folder
+        |___sub-01
+                |___anat
+                |___fsout
+                |___pvs
+                      |___pvs.mask.nii.gz
+                      |___pvs.stat
+                            |___wm.csv
+                            |___wmparc.csv
+</code></pre>
+
+<p>This example uses the default threshold value of <code>-t 0.00002</code> and output folder name of <code>pvs</code>. Optimum threshold depends on input image quality and resolution. Above threshold showed to generate semi-optimum result on clinical 3D T1 MRI, such as those acquired in ADNI dataset <a href="https://www.biorxiv.org/content/10.1101/2020.01.30.927350v1.abstract">[ref]</a>. </p>
+<p>Similar to <a href="#mapping-pvs-using-epc-t1-and-t2">EPC example</a>, in order to find the optimum threshold for your dataset, run the existing pipeline with default values. Then overlay <code>sub-01/pvs/frangi.nii.gz</code> on <code>sub-01/pvs/t1w.nii.gz</code> image and assess different thresholds. </p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../pvs_qc/" class="btn btn-neutral float-right" title="PVS Quality Control and Correction">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../installation/" class="btn btn-neutral" title="Getting Started"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../installation/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../pvs_qc/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
