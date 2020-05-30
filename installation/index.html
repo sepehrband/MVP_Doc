@@ -139,21 +139,22 @@ export MVPDIR PATH
 <pre><code>mvp.pvs.fsout.sh
 </code></pre>
 <p>which will generate below message:</p>
-<pre><code>ERROR! No options were passed
-Usage: 
-map.pvs.epc.sh -f STUDY_FOLDER -s SUBJECT_ID -t FRANGI_ THRESHOLD -v MAX_PVS_VOLUME -b BG_SEGMENTATION -o OUTPUT_   DIR_NAME 
-Default values: 
-    -t FRANGI_THRESHOLD [defualt = 0.00002] 
-    -v MAX_PVS_VOLUME [default = do nothing, remove PVS     large than are larger than MAX_PVS_VOLUME voxels] 
-    -b BG_SEGMENTATION [default = 1, set to 0 to skip   basal ganglia PVS segmentation] 
-    -o OUTPUT_DIR_NAME [e.g. pvs_seg, default = study_  folder/subject_id/pvs]
+<pre><code class="text">    ERROR! No options were passed
+    Usage: 
+    map.pvs.epc.sh -f STUDY_FOLDER -s SUBJECT_ID -t FRANGI_ THRESHOLD -v MAX_PVS_VOLUME -b BG_SEGMENTATION -o OUTPUT_   DIR_NAME 
+    Default values: 
+        -t FRANGI_THRESHOLD [defualt = 0.00002] 
+        -v MAX_PVS_VOLUME [default = do nothing, remove PVS     large than are larger than MAX_PVS_VOLUME voxels] 
+        -b BG_SEGMENTATION [default = 1, set to 0 to skip   basal ganglia PVS segmentation] 
+        -o OUTPUT_DIR_NAME [e.g. pvs_seg, default = study_  folder/subject_id/pvs]
 
 
-Example: sh mvp.pvs.fsout.sh -f /my_projects/aging_ project -s sub-01 -t 0.00001 -o pvs
+    Example: sh mvp.pvs.fsout.sh -f /my_projects/aging_ project -s sub-01 -t 0.00001 -o pvs
 
-This script assumes there is a folder inside sub-01     called fsout, which hosts FreeSurfer outputs (lable, mri    ... folders). 
-For example: /my_projects/aging_project/sub-01/fsout/mri    folder must exists!
+    This script assumes there is a folder inside sub-01     called fsout, which hosts FreeSurfer outputs (lable, mri    ... folders). 
+    For example: /my_projects/aging_project/sub-01/fsout/mri    folder must exists!
 </code></pre>
+
 <h3 id="4-additional-pipeline-dependency">4. Additional pipeline dependency</h3>
 <p>Automated pipeline provided in MVP uses MATLAB for different purposes, including image enhancement, posprocessing and certain feature extractions. For the ease of use, add below line to your source file (e.g. <code>~/.bashrc</code>).</p>
 <pre><code>export PATH=/Applications/MATLAB_R2019b.app/bin/:${PATH}
