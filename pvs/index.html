@@ -238,6 +238,10 @@ Optional arguments:
 
 <p>This example uses the default threshold value of <code>-t 0.00002</code> and output folder name of <code>pvs</code>. Optimum threshold depends on input image quality and resolution. Above threshold showed to generate semi-optimum result on clinical 3D T1 MRI, such as those acquired in ADNI dataset <a href="https://www.biorxiv.org/content/10.1101/2020.01.30.927350v1.abstract">[ref]</a>. </p>
 <p>Similar to <a href="#mapping-pvs-using-epc-t1-and-t2">EPC example</a>, in order to find the optimum threshold for your dataset, run the existing pipeline with default values. Then overlay <code>sub-01/pvs/frangi.nii.gz</code> on <code>sub-01/pvs/t1w.nii.gz</code> image and assess different thresholds. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Basal ganglia PVS mapping uses the fixed threshold of 0.0015. Currently no arugment for assigning this number is availble. To use other thresholds, first overlay <code>sub-01/pvs/frangi.bg.nii.gz</code> on <code>sub-01/pvs/t1w.nii.gz</code> and then apply new threshold using <code>fslmaths frangi.bg.nii.gz -thr $new_threshold -bin new_pvs_bg.nii.gz</code></p>
+</div>
               
             </div>
           </div>
