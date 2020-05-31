@@ -190,7 +190,7 @@ mvp.pvs.epc.sh -f ${MVPDIR}/example/hcp-like_example -s sub-01 -w 0 -b 1 -t 0.00
 <p>Results from both of above commands will be stored in <code>study-folder/sub-id/pvs</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We noted that BG PVS mapping is less stable compared to WM PVS mapping. Hence, it requires visual inspection and most likely manual correction.</p>
+<p>We noted that BG PVS mapping is less stable compared to WM PVS mapping. Hence, it requires visual inspection and most likely manual correction. Future version includes more reliable BG segmentation. </p>
 </div>
 <h3 id="mapping-pvs-from-only-t2-mri">Mapping PVS from only T2 MRI</h3>
 <p>This pipeline can be used for PVS mapping using only one of 3D T1 or 3D T2 MRI on HCP-like data. Note that when both are  available the EPC approach is recommended. We added this option because there are certain situations that user may want to derive PVS from only T1 or T2. For example, when T1 and T2 could not be aligned. Or when one is distorted.  </p>
@@ -245,6 +245,10 @@ Optional arguments:
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Basal ganglia PVS mapping uses the fixed threshold of 0.0015. Currently no arugment for assigning this number is availble. To use other thresholds, first overlay <code>sub-01/pvs/frangi.bg.nii.gz</code> on <code>sub-01/pvs/t1w.nii.gz</code> and then apply new threshold using <code>fslmaths frangi.bg.nii.gz -thr $new_threshold -bin new_pvs_bg.nii.gz</code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Example dataset in the repository intentially reflect potential challenges such as false positives segmentation in BG or missclassified WMH, to highlight the importance of quality control and postprocessing corrections. </p>
 </div>
               
             </div>
