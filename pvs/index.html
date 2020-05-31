@@ -58,9 +58,15 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">PVS Mapping Pipelines</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#mapping-pvs-in-bg">Mapping PVS in BG</a>
+    <li class="toctree-l2"><a class="reference internal" href="#mapping-pvs-using-epc-t1-and-t2">Mapping PVS using EPC (T1 and T2)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#mapping-pvs-in-bg">Mapping PVS in BG</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#mapping-pvs-from-only-t2-mri">Mapping PVS from only T2 MRI</a>
+    <li class="toctree-l3"><a class="reference internal" href="#mapping-pvs-from-only-t2-mri">Mapping PVS from only T2 MRI</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#mapping-pvs-from-typical-t1-mri">Mapping PVS from typical T1 MRI</a>
     </li>
     </ul>
                     </li>
@@ -109,11 +115,13 @@
           <div role="main">
             <div class="section">
               
-                <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Note  that these pipelines may not be optimized for all datasets or applications, and therefore require visual inspection and parameter optimization.</p>
-</div>
+                <h1 id="pvs-mapping-pipelines">PVS Mapping Pipelines</h1>
+<p>On this section, several pipelines are presented that enable automated PVS mapping from different input data scenarios. </p>
 <p>Here we share pipelines that are tested on certain datasets (e.g. <a href="https://www.humanconnectome.org">Human Connectome Project</a> or <a href="http://adni.loni.usc.edu">ADNI</a> cohorts). These pipelines allow users to have a simple and fast implementation of the PVS mapping. Underlying modules and image processing approaches used in these pipelines are descripted in this <a href="https://www.nature.com/articles/s41598-019-48910-x">paper</a>. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These pipelines are validated and tested on specific data with certain CNR and SNR. These pipelines may not be optimized for all datasets or applications. Therefore users should perform visual inspection and parameter optimization.</p>
+</div>
 <h2 id="mapping-pvs-using-epc-t1-and-t2">Mapping PVS using EPC (T1 and T2)</h2>
 <p>This pipeline is written for when both 3D T1 and 3D T2 MRIs are available, which provides a high sensitivity to PVS. The ideal input for this pipeline is HCP-like data (i.e. submilimeter 3D T1w and T2w).  </p>
 <p>T1w and T2w should be preprocessed using HCP minimal preprocessing pipeline (users can use their own preprocessing, but should ensure that T1 and T2 are aligned and are saved using below naming conventions). The pipline reads <code>T1w_acpc_dc_restore_brain.nii.gz</code>, <code>T2w_acpc_dc_restore_brain.nii.gz</code>, <code>wmparc.nii.gz</code> and <code>ribbon.nii.gz</code> files and generates enhanced PVS contrast (EPC). It also generates PVS mask in white matter and basal ganglia and quantifies PVS volume fraction in these regions using <code>wmparc</code> labels. For more information about white matter regions of <code>wmparc</code> see <a href="https://surfer.nmr.mgh.harvard.edu/ftp/articles/desikan06-parcellation.pdf">this paper</a>.</p>
