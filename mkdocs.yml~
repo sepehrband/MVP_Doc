@@ -1,0 +1,7 @@
+site_name: MVP Doc
+nav:
+    - Getting Started: installation.md
+    - PVS Mapping Pipelines: index.md
+    - About: about.md
+    - Licence: license.md
+theme: readthedocs

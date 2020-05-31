@@ -1,0 +1,3 @@
+mkdocs serve # to edit
+mkdocs build # to build
+mkdocs gh-deploy # to deploy
